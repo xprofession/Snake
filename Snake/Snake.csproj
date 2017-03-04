@@ -35,6 +35,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Line.cs" />
+    <Compile Include="Snake.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Direction.cs" />
+    <Compile Include="Figure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

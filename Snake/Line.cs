@@ -1,42 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Snake
 {
-	public class Line
+	public class Line : Figure
 	{
-		int x;
-		int y;
-		int lenght;
-		char symb;
 		LineDirection direction;
+		int lenght;
 
 		public Line(int _x, int _y, int _lenght, LineDirection _direction, char _symb)
 		{
-			x = _x;
-			y = _y;
-			lenght = _lenght;
-			direction = _direction;
-			symb = _symb;
-			Draw();
-		}
-
-		public void Draw()
-		{
-			Console.SetCursorPosition(x, y);
-			if (direction == LineDirection.Horizontal)
+			pList = new List<Point>();
+			if (_direction == LineDirection.Horizontal)
 			{
-				for (int i = 0; i < lenght; i++)
+				for (int x = _x; x < _lenght; x++)
 				{
-					Console.Write(symb);
+					Point p = new Point(x, _y, _symb);
+					pList.Add(p);
+  				}
+			}
+			else if (_direction == LineDirection.Vertical)
+			{
+				for (int y = _y; y < _lenght; y++)
+				{
+					Point p = new Point(_x, y, _symb);
+					pList.Add(p);
 				}
 			}
-			else if (direction == LineDirection.Vertical)
-			{
-				for (int i = 0; i < lenght; i++)
-				{
-					Console.SetCursorPosition(x, y + i);
-					Console.Write(symb);
-				}
-			}
+			//x = _x;
+			//y = _y;
+			//lenght = _lenght;
+			//direction = _direction;
+			//symb = _symb;
 		}
 
 		public enum LineDirection
