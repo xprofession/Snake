@@ -39,6 +39,9 @@
     <Compile Include="Point.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="FoodGenerator.cs" />
+    <Compile Include="Walls.cs" />
+    <Compile Include="Score.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

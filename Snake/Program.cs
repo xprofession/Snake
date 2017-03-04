@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Snake
 {
@@ -6,23 +7,43 @@ namespace Snake
 	{
 		public static void Main(string[] args)
 		{
-			//Borders
-			Line topLine = new Line(1, 0, 78, Line.LineDirection.Horizontal, '-');
-			Line bottomLine = new Line(1, 24, 78, Line.LineDirection.Horizontal, '-');
-			Line leftLine = new Line(0, 1, 23, Line.LineDirection.Vertical, '|');
-			Line rightLine = new Line(79, 1, 23, Line.LineDirection.Vertical, '|');
-			topLine.Draw();
-			bottomLine.Draw();
-			leftLine.Draw();
-			rightLine.Draw();
+			Walls walls = new Walls(80, 25);
+			walls.Draw();
 
 			//Initializing Snake
 			Point tail = new Point(4, 5, '*');
 			Snake snake = new Snake(tail, 3, Direction.Right);
 			snake.Draw();
-			snake.Move();
 
-			Console.ReadKey();
+			FoodGenerator foodGenerator = new FoodGenerator(78, 23, '#');
+			Point food = foodGenerator.CreateFood();
+			food.DrawPoint();
+
+			while (true)
+			{
+				if (walls.IsHit(snake) || snake.IsHitTail())
+				{
+					break;
+				}
+
+				if (snake.Eat(food))
+				{
+					food = foodGenerator.CreateFood();
+					food.DrawPoint();
+				}
+				else
+				{
+					snake.Move();
+				}
+
+				//Thread.Sleep(100);
+
+				if (Console.KeyAvailable)
+				{
+					ConsoleKeyInfo key = Console.ReadKey();
+					snake.KeyHandler(key.Key);
+				}
+			}
 		}
 	}
 }

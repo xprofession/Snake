@@ -5,7 +5,7 @@ namespace Snake
 	{
 		int x;
 		int y;
-		char symb;
+		public char symb;
 
 		public Point(int _x, int _y, char _symb)
 		{
@@ -31,18 +31,23 @@ namespace Snake
 		{
 			if (direction == Direction.Right)
 				x = x + offset;
-			if (direction == Direction.Left)
+			else if (direction == Direction.Left)
 				x = x - offset;
-			if (direction == Direction.Up)
-				y = y + offset;
-			if (direction == Direction.Down)
+			else if (direction == Direction.Up)
 				y = y - offset;
+			else if (direction == Direction.Down)
+				y = y + offset;
 		}
 
 		public void ClearPoint()
 		{
 			symb = ' ';
 			DrawPoint();
+		}
+
+		public bool IsHit(Point p)
+		{
+			return p.x == this.x && p.y == this.y;
 		}
 }
 }
