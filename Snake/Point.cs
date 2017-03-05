@@ -7,6 +7,10 @@ namespace Snake
 		int y;
 		public char symb;
 
+		public Point()
+		{ 
+		}
+
 		public Point(int _x, int _y, char _symb)
 		{
 			x = _x;

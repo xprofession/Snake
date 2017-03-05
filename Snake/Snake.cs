@@ -8,6 +8,8 @@ namespace Snake
 	public class Snake : Figure
 	{
 		Direction direction;
+		int speedVertical = 170;
+		int speedHorizontal = 130;
 
 		public Snake(Point tail, int lenght, Direction _direction)
 		{
@@ -33,11 +35,11 @@ namespace Snake
 
 			if (direction == Direction.Up || direction == Direction.Down)
 			{
-				Thread.Sleep(200);
+				Thread.Sleep(speedVertical);
 			}
 			else
 			{
-				Thread.Sleep(150);
+				Thread.Sleep(speedHorizontal);
 			}
 		}
 
@@ -68,6 +70,11 @@ namespace Snake
 			{
 				food.symb = head.symb;
 				pList.Add(food);
+				Score.score += 1;
+				if(speedVertical > 50)
+					speedVertical -= 2;
+				if (speedVertical > 30)
+					speedHorizontal -= 2;
 				return true;
 			}
 			else
@@ -85,6 +92,23 @@ namespace Snake
 					return true;
 			}
 			return false;
+		}
+
+		internal bool IsHitFood(Point food)
+		{
+			Point head = pList.Last();
+			for (int i = 0; i < pList.Count - 2; i++)
+			{
+				if (food.IsHit(pList[i]))
+					return true;
+			}
+			return false;
+		}
+
+		public void PrintSpeed()
+		{
+			Console.SetCursorPosition(3, 0);
+			Console.Write("Speed: " + speedHorizontal + " points/ms");
 		}
 	}
 }

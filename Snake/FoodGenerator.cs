@@ -16,11 +16,18 @@ namespace Snake
 			this.symb = symb;
 		}
 
-		public Point CreateFood()
+		public Point CreateFood(Figure figure)
 		{
-			int x = random.Next(2, mapWidth - 2);
-			int y = random.Next(2, mapHeight - 2);
-			return new Point(x, y, symb);
+			while (true)
+			{
+				int x = random.Next(2, mapWidth - 2);
+				int y = random.Next(2, mapHeight - 2);
+				Point p = new Point(x, y, symb);
+				if (!figure.IsHit(p))
+				{
+					return p;
+				}
+			}
 		}
 	}
 }
